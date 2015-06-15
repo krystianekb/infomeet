@@ -5,7 +5,6 @@ import javax.inject.Inject;
 
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.infomeet.client.zookeeper.ClientCacheServiceDicovery;
-import org.infomeet.client.zookeeper.ClientServiceDicovery;
 import org.infomeet.data.Greeting;
 import org.infomeet.zookeeeper.data.RestServiceDetails;
 import org.springframework.stereotype.Component;

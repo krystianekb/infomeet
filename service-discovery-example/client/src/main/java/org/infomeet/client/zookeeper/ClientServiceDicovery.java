@@ -1,5 +1,6 @@
 package org.infomeet.client.zookeeper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ClientServiceDicovery {
+public class ClientServiceDicovery implements ServiceURLProvider{
 
 	@Inject
 	private ServiceDiscovery<RestServiceDetails> discovery;
@@ -30,9 +31,16 @@ public class ClientServiceDicovery {
 		return services;
 	}
 	
-	@Bean(initMethod = "start", destroyMethod = "close")
-	public ServiceProvider<RestServiceDetails> serviceProvider() {
-		return discovery.serviceProviderBuilder().serviceName(CuratorAppConfig.NAME).build();
+	public String getInstanceURL() throws Exception {
+		return discovery.queryForInstances(CuratorAppConfig.NAME).iterator().next().buildUriSpec();
+	}
+
+	public Collection<String> getAllInstancesURLs() throws Exception {
+		Collection<String> tmp = new ArrayList<String>();		
+		for (ServiceInstance<RestServiceDetails> instance: discovery.queryForInstances(CuratorAppConfig.NAME)) {
+			tmp.add(instance.buildUriSpec());
+		}		
+		return tmp;
 	}
 
 }
