@@ -22,7 +22,8 @@ public class ApplicationLauncher {
 	public static void main(String[] args) throws InterruptedException {
 		ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(
 				"org.infomeet");
-		joinTheSubThread();		
+		joinTheSubThread();
+		context.close();
 	}
 
 }

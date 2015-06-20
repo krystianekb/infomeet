@@ -38,10 +38,10 @@ public class CuratorPathWatcher {
 			public void childEvent(CuratorFramework client, TreeCacheEvent event)
 					throws Exception {
 				ChildData data = event.getData();
-				log.info("Change ({}) : {} = {}", 
-					event.getType(),
-					data != null ? data.getPath() : null, 
-					data != null && data.getData() != null ? new String(data.getData()) : null);
+				log.info("Change ({}) : {} = {}", event.getType(),
+						data != null ? data.getPath() : null,
+						data != null && data.getData() != null ? new String(
+								data.getData()) : null);
 			}
 		});
 	}
